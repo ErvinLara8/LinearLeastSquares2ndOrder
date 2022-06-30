@@ -21,48 +21,48 @@ class LLS:
         # Plotting the points
         plt.scatter(self.x_values, self.y_values)
 
-        # Da/Dl parameters
-        da_dl_x2 = 0
-        da_dl_x = 0
-        da_dl_1 = 0
-        da_dl_y = 0
+        # DL/Da parameters
+        dl_da_x2 = 0
+        dl_da_x = 0
+        dl_da_1 = 0
+        dl_da_y = 0
 
-        # Db/Dl parameters
-        db_dl_x2 = 0
-        db_dl_x = 0
-        db_dl_1 = 0
-        db_dl_y = 0
+        # DL/Db parameters
+        dl_db_x2 = 0
+        dl_db_x = 0
+        dl_db_1 = 0
+        dl_db_y = 0
 
-        # Dc/Dl parameters
-        dc_dl_x2 = 0
-        dc_dl_x = 0
-        dc_dl_1 = 0
-        dc_dl_y = 0
+        # DL/Dc parameters
+        dl_dc_x2 = 0
+        dl_dc_x = 0
+        dl_dc_1 = 0
+        dl_dc_y = 0
 
         # Calculating all variables
         for i in range(len(self.x_values)):
 
-            # Calculating all Da/DL variables
-            da_dl_x2 += -2 * (self.x_values[i] ** 4)
-            da_dl_x += -2 * (self.x_values[i] ** 3)
-            da_dl_1 += -2 * (self.x_values[i] ** 2)
-            da_dl_y += -2 * (self.x_values[i] ** 2) * self.y_values[i]
+            # Calculating all DL/Da variables
+            dl_da_x2 += -2 * (self.x_values[i] ** 4)
+            dl_da_x += -2 * (self.x_values[i] ** 3)
+            dl_da_1 += -2 * (self.x_values[i] ** 2)
+            dl_da_y += -2 * (self.x_values[i] ** 2) * self.y_values[i]
 
-            # Calculating all Db/DL variables
-            db_dl_x2 += -2 * (self.x_values[i] ** 3)
-            db_dl_x += -2 * (self.x_values[i] ** 2)
-            db_dl_1 += -2 * (self.x_values[i])
-            db_dl_y += -2 * (self.x_values[i]) * self.y_values[i]
+            # Calculating all DL/Db variables
+            dl_db_x2 += -2 * (self.x_values[i] ** 3)
+            dl_db_x += -2 * (self.x_values[i] ** 2)
+            dl_db_1 += -2 * (self.x_values[i])
+            dl_db_y += -2 * (self.x_values[i]) * self.y_values[i]
 
-            # Calculating all Dc/DL variables
-            dc_dl_x2 += -2 * (self.x_values[i] ** 2)
-            dc_dl_x += -2 * (self.x_values[i])
-            dc_dl_1 += -2 * 1
-            dc_dl_y += -2 * 1 * self.y_values[i]
+            # Calculating all DL/Dc variables
+            dl_dc_x2 += -2 * (self.x_values[i] ** 2)
+            dl_dc_x += -2 * (self.x_values[i])
+            dl_dc_1 += -2
+            dl_dc_y += -2 * self.y_values[i]
 
         # Creating the matrices
-        x_matrix = np.array([[da_dl_x2, da_dl_x, da_dl_1], [db_dl_x2, db_dl_x, db_dl_1], [dc_dl_x2, dc_dl_x, dc_dl_1]])
-        y_matrix = np.array([[da_dl_y], [db_dl_y], [dc_dl_y]])
+        x_matrix = np.array([[dl_da_x2, dl_da_x, dl_da_1], [dl_db_x2, dl_db_x, dl_db_1], [dl_dc_x2, dl_dc_x, dl_dc_1]])
+        y_matrix = np.array([[dl_da_y], [dl_db_y], [dl_dc_y]])
 
         # Getting the unknowns
         abc_matrix = np.dot(inv(x_matrix), y_matrix)
